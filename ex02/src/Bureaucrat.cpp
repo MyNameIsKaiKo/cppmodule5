@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "../include/Bureaucrat.hpp"
-#include "../include/Form.hpp"
+#include "../include/AForm.hpp"
 
 Bureaucrat::Bureaucrat() : _name("Default"), _grade(150) {}
 
@@ -85,9 +85,9 @@ void				Bureaucrat::gradeDown()
 	}
 }
 
-void				Bureaucrat::signForm(Form& form)
+void				Bureaucrat::signAForm(AForm& form)
 {
-	if (form.getState() == 1)
+	if (form.getState() == true)
 	{
 		std::cout << this->getName() << " could'nt sign " << form.getName();
 		std::cout << " becauce form is already signed" << std::endl;
@@ -118,6 +118,20 @@ void				Bureaucrat::signForm(Form& form)
 		}
 	}
 }
+
+void				Bureaucrat::executeForm(AForm const & form)
+{
+	try
+	{
+		form.execute(*this);
+		std::cout << this->getName() << " execute " << form.getName() << std::endl; 
+	}
+	catch (std::exception &e)
+	{
+		std::cerr << "Exception caught: " << e.what() << std::endl;
+	}
+}
+
 
 const char*			Bureaucrat::GradeTooHighException::what() const throw()
 {

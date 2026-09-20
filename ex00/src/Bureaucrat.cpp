@@ -27,11 +27,10 @@ Bureaucrat::Bureaucrat(const std::string name, int grade) : _name(name)
 	this->_grade = grade;
 }
 
-Bureaucrat::Bureaucrat(const Bureaucrat& other)
+Bureaucrat::Bureaucrat(const Bureaucrat& other) : _name(other._name)
 {
 	if (this != &other)
 	{
-		(std::string)this->_name = other._name;
 		this->_grade = other._grade;
 	}
 }
